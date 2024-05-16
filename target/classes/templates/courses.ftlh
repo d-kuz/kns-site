@@ -11,5 +11,9 @@
             </a>
             </div>
         </#list>
-
+    <#if user.isAdmin()>
+        <a class="a_style" href="/course/add">
+            Добавить курс
+        </a><br>
+    </#if>
 </@t.template>

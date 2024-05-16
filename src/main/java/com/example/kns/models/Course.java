@@ -26,23 +26,6 @@ public class Course {
     mappedBy = "course")
     private List<Task> tasks = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="course", fetch = FetchType.LAZY )
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<UserCourse> userCourses  = new HashSet<UserCourse>();
-
-
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name = "user_course",
-//            joinColumns = @JoinColumn(name = "course_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id"))
-//    private List<User> usersList = new ArrayList<>();
-
-
-
-    public Integer getSizeTask() {
-        return tasks.size();
-    }
-
     public void addTaskToCourse(Task task) {
         task.setCourse(this);
         this.tasks.add(task);

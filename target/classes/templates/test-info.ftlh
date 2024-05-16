@@ -14,6 +14,14 @@
      <br>
      <br>
 
+    <#if user.isAdmin()>
+        <a class="a_style" href="/test/{idTest}/addQ">
+            Добавить вопрос
+        </a><br>
+        <a class="a_style" href="/test/{idTest}/addR">
+            Добавить результат
+        </a><br>
+    </#if>
     <br>
 
 </@t.template>

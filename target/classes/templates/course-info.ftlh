@@ -27,4 +27,10 @@
      </#list>
     <br>
 
+    <#if user.isAdmin()>
+        <a class="a_style" href="/test/add">
+            Добавить тест
+        </a><br>
+    </#if>
+
 </@t.template>

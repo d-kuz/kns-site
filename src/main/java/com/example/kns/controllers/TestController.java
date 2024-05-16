@@ -24,6 +24,7 @@ public class TestController {
     @GetMapping("/test")
     public String tests(Principal principal, Model model) {
         model.addAttribute("test", testService.listTests());
+        model.addAttribute("empty", testService.listTests().isEmpty());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "tests";
     }

@@ -3,7 +3,7 @@
     <h1 style="text-align: center">Тесты</h1><hr>
 
     <hr>
-    <#if notEmptyTest>
+    <#if !empty>
     <#list tests as test>
         <div class="container">
             <a class="a_style" href="/test/${test.getId()}">
