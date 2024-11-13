@@ -30,12 +30,13 @@ public class Test {
             mappedBy = "test")
     private List<QuestionsResult> questionsResults = new ArrayList<>();
 
-
-    public void addQuestionToTest(Question question) {
-        question.setTest(this);
-        this.questions.add(question);
-    }
-
-    public void addResultToTest(QuestionsResult result) {
-    }
 }
+//    public void addQuestionToTest(Question question) {
+//        question.setTest(this);
+//        this.questions.add(question);
+//    }
+//
+//    public void addResultToTest(QuestionsResult result) {
+//        result.setTest(this);
+//        this.questionsResults.add(result;
+//    }

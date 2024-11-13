@@ -3,20 +3,29 @@
     <h1 style="text-align: center">Регистрация</h1>
     <hr>
     <form action="/registration" method="post">
+
+        <div class="container">
         <div class="form-group">
             <label for="name">Имя пользователя</label>
             <input type="text" class="form-control" required id="name" name="name">
         </div>
+        </div>
+        <div class="container">
         <div class="form-group">
             <label for="email">Электронная почта</label>
             <input type="email" class="form-control" id="email" required name="email">
         </div>
+        </div>
+        <div class="container">
         <div class="form-group">
             <label for="password">Пароль</label>
             <input type="password" class="form-control" id="password" required name="password">
         </div>
+        </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <div class="container">
         <button type="submit" style="width: 100%" class="btn btn-dark">Зарегистрироваться</button>
+        </div>
     </form>
     <#if errorMessage??>
         <h2 style="color: red">${errorMessage}</h2>

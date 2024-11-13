@@ -35,14 +35,6 @@ public class UserController {
         return "profile";
     }
 
-//    @PostMapping("/profile")
-//    public String cleanCourses(Principal principal,
-//                          Model model) {
-//        User user = userService.getUserByPrincipal(principal);
-//        userService.cleanCourse(user);
-//        return "profile";
-//    }
-
     @GetMapping("/registration")
     public String registration(Principal principal, Model model) {
         model.addAttribute("user", userService.getUserByPrincipal(principal));
@@ -52,7 +44,8 @@ public class UserController {
     @PostMapping("/registration")
     public String createUser(User user, Model model) {
         if (!userService.createUser(user)) {
-            model.addAttribute("errorMessage", "Пользователь с email: " + user.getEmail() + " уже существует");
+            model.addAttribute("errorMessage", "Пользователь с email: "
+                    + user.getEmail() + " уже существует");
             return "registration";
         }
         return "redirect:/login";

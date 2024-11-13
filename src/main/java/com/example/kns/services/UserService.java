@@ -28,7 +28,7 @@ public class UserService {
         if (userRepository.findByEmail(email) != null) return false;
         user.setActive(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
+        user.getRoles().add(Role.USER);
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
         return true;
@@ -52,17 +52,6 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void changeUserRoles(User user) {
-        //Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
-        user.getRoles().clear();
-//        for (String key : form.keySet()) {
-//            if (roles.contains(key)) {
-//                user.getRoles().add(Role.valueOf(key));
-//            }
-//        }
-        user.getRoles().add(Role.ROLE_ADMIN);
-        userRepository.save(user);
-    }
 
     public void changeUserEmail(User user, String email) {
         user.setEmail(email);
@@ -70,13 +59,23 @@ public class UserService {
     }
 
     public void changeUserPassword(User user, String pass) {
-        user.setPassword(pass);
+        user.setPassword(passwordEncoder.encode(pass));
         userRepository.save(user);
     }
 
     public User getUserByPrincipal(Principal principal) {
         if (principal == null) return new User();
         return userRepository.findByEmail(principal.getName());
+    }
+
+    public User getUserById(Long id) {
+        User us;
+        for (User user : userRepository.findAll()){
+            if (user.getId()==id){
+                return user;
+            }
+        }
+        return null;
     }
 
     public List<Course> getCourseList(User user) {

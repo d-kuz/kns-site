@@ -45,9 +45,8 @@ public class User implements UserDetails {
     }
 
     public boolean isAdmin() {
-        return roles.contains(Role.ROLE_ADMIN);
+        return roles.contains(Role.ADMIN);
     }
-
 
     public Long getId() {
         return id;
@@ -65,7 +64,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-
     public String getName() {
         return name;
     }
@@ -82,8 +80,6 @@ public class User implements UserDetails {
         this.active = active;
     }
 
-
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -95,18 +91,6 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-//    public List<Course> getCourseList() {
-//        return courseList;
-//    }
-//
-//    public void setCourseList(List<Course> courseList) {
-//        this.courseList = courseList;
-//    }
-
-
-    // security config
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -59,6 +59,4 @@ public class Answer {
         this.id = id;
     }
 
-
-
 }

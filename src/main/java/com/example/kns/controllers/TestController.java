@@ -23,8 +23,9 @@ public class TestController {
 
     @GetMapping("/test")
     public String tests(Principal principal, Model model) {
-        model.addAttribute("test", testService.listTests());
-        model.addAttribute("empty", testService.listTests().isEmpty());
+        List <Test> tests = testService.listTests();
+        model.addAttribute("tests", tests);
+        model.addAttribute("Empty", tests.isEmpty());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "tests";
     }
@@ -43,8 +44,9 @@ public class TestController {
         Test test = testService.getTestById(idTest);
         User user = userService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        model.addAttribute("test", test);
         model.addAttribute("q", testService.listQuestions(idTest));
+        model.addAttribute("a", testService.listResult(idTest));
+        model.addAttribute("r", testService.listResult(idTest));
         return "questions";
     }
 
@@ -81,9 +83,8 @@ public class TestController {
     }
 
 
-
-
-
+}
+/*
     @GetMapping("/test/add")
     public String testAdd(Model model, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
@@ -96,9 +97,9 @@ public class TestController {
 
     @PostMapping("/test/add")
     public String testAdd(@RequestParam(name = "Title") String title,
-                            @RequestParam(name = "Price") int price,
-                            @RequestParam(name = "Description") String text,
-                            Model model, Principal principal) {
+                          @RequestParam(name = "Price") int price,
+                          @RequestParam(name = "Description") String text,
+                          Model model, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
         if (user.isAdmin()){
             Test test = new Test();
@@ -150,10 +151,10 @@ public class TestController {
 
     @PostMapping("/test/{idTest}/addR")
     public String resultAdd(@PathVariable Long idTest,
-                              @RequestParam(name = "Min") int min,
-                              @RequestParam(name = "Max") int max,
-                              @RequestParam(name = "Text") String text,
-                              Model model, Principal principal) {
+                            @RequestParam(name = "Min") int min,
+                            @RequestParam(name = "Max") int max,
+                            @RequestParam(name = "Text") String text,
+                            Model model, Principal principal) {
         User user = userService.getUserByPrincipal(principal);
         if (user.isAdmin()){
             QuestionsResult result = new QuestionsResult();
@@ -165,10 +166,4 @@ public class TestController {
             model.addAttribute("errorMessage", "Нет доступа!");
         }
         return "/test/"+idTest+"/add";
-    }
-
-
-
-
-
-}
+    }*/

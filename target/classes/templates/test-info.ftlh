@@ -8,19 +8,26 @@
     <p style="text-align: center">${test.getDescription()}</p>
     <br>
     <br>
-     <a class="a_style" href="/test/${test.getId()}/${questions}">
+    <div class="container">
+     <a class="a_style" href="/test/${test.getId()}/questions">
              <h5>Начать</h5>
          </a>
+
+    </div>
      <br>
      <br>
 
     <#if user.isAdmin()>
+        <div class="container">
         <a class="a_style" href="/test/{idTest}/addQ">
             Добавить вопрос
-        </a><br>
+        </a>
+        </div><br>
+        <div class="container">
         <a class="a_style" href="/test/{idTest}/addR">
             Добавить результат
-        </a><br>
+        </a>
+        </div><br>
     </#if>
     <br>
 

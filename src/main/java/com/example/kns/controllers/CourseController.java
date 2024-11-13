@@ -79,45 +79,34 @@ public class CourseController {
         return "redirect:/course/"+idCourse+"/task/"+idTask;
     }
 
-    @GetMapping("/course/add")
+    @GetMapping("/add/course")
     public String courseAdd(Model model, Principal principal) {
         User user = courseService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        if (!user.isAdmin()){
-            model.addAttribute("errorMessage", "Нет доступа!");
-        }
         return "courseAdd";
     }
 
-    @PostMapping("/course/add")
+    @PostMapping("/add/course")
     public String courseAdd(@RequestParam(name = "Title") String title,
                             @RequestParam(name = "Price") int price,
                             @RequestParam(name = "Description") String text,
                             Model model, Principal principal) {
         User user = courseService.getUserByPrincipal(principal);
-        if (user.isAdmin()){
-            Course course = new Course();
-            course.setTitle(title);
-            course.setPrice(price);
-            course.setDescription(text);
-            courseService.addCourse(course);
-        }else{
-            model.addAttribute("errorMessage", "Нет доступа!");
-        }
-
-        return "courseAdd";
+        Course course = new Course();
+        course.setTitle(title);
+        course.setPrice(price);
+        course.setDescription(text);
+        courseService.addCourse(course);
+        return "redirect:/course";
     }
-    @GetMapping("/course/{idCourse}/add")
+    @GetMapping("/add/course/{idCourse}")
     public String taskAdd(@PathVariable Long idCourse, Model model, Principal principal) {
         User user = courseService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
-        if (!user.isAdmin()){
-            model.addAttribute("errorMessage", "Нет доступа!");
-        }
-        return "/course/"+idCourse+"/add";
+        return "/add/course/"+idCourse;
     }
 
-    @PostMapping("/course/{idCourse}/add")
+    @PostMapping("/add/course/{idCourse}")
     public String taskAdd(@PathVariable Long idCourse,
                           @RequestParam(name = "Text") String text,
                           @RequestParam(name = "Namber") int namber,
@@ -125,18 +114,14 @@ public class CourseController {
                           Model model, Principal principal) {
         User user = courseService.getUserByPrincipal(principal);
         Course course = courseService.getCourseById(idCourse);
-        if (user.isAdmin()) {
-            Task task = new Task();
-            task.setText(text);
-            task.setLink(link);
-            task.setNamber(namber);
-            task.setCourse(course);
-            course.addTaskToCourse(task);
-            courseService.addTask(course, task);
-        }else{
-            model.addAttribute("errorMessage", "Нет доступа!");
-        }
-        return "/course/"+idCourse+"/add";
+        Task task = new Task();
+        task.setText(text);
+        task.setLink(link);
+        task.setNamber(namber);
+        task.setCourse(course);
+        course.addTaskToCourse(task);
+        courseService.addTask(course, task);
+        return "redirect:/course/"+idCourse;
     }
 }
 

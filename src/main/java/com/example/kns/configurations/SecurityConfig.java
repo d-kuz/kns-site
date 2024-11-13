@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/",  "/course/**", "/test/**", "/profile",
-                        "/registration", "/admin", "/userCange")
+                        "/registration", "/admin", "/userCange", "/add/**")
                 .permitAll()
             .and()
                 .formLogin()
@@ -49,3 +49,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder(8);
     }
 }
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/admin", "/add/**")
+//                .hasRole("ADMIN")
+//                .antMatchers( "/course/**", "/test/**", "/profile", "/userChange")
+//                .anonymous()
+//                .antMatchers("/", "/registration", "/login")
+//                .permitAll()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .defaultSuccessUrl("/")
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .logoutSuccessUrl("/")
+//                .permitAll();
+//
+//    }

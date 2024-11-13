@@ -24,28 +24,6 @@ public class TestService {
         return testRepository.findAll();
     }
 
-    public void addTest(Test test){
-        testRepository.save(test);
-    }
-    public void addQuestions(Test test, Question question){
-        question.setTest(test);
-        test.addQuestionToTest(question);
-        testRepository.save(test);
-        questionRepository.save(question);
-    }
-    public void addQuestionsAnswer(Question question, QuestionsAnswer questionsAnswer){
-        questionsAnswer.setQuestion(question);
-        question.addQuestionAnswer(questionsAnswer);
-        questionRepository.save(question);
-        questionsAnswerRepository.save(questionsAnswer);
-    }
-
-    public void addResult(Test test, QuestionsResult result){
-        result.setTest(test);
-        test.addResultToTest(result);
-        testRepository.save(test);
-        questionsResultRepository.save(result);
-    }
 
     public List<Question> findQuestionByIdTest(Long idTest) {
         List<Question> newList = new ArrayList<>();
@@ -71,4 +49,48 @@ public class TestService {
     public Test getTestById(Long idTest) {
         return testRepository.findById(idTest).orElse(null);
     }
+
+    public List<QuestionsResult> listResult(Long idTest) {
+        List<QuestionsResult> list = findQuestionResultByIdTest(idTest);
+        Comparator<QuestionsResult> compareByNamber = new Comparator<QuestionsResult>() {
+            @Override
+            public int compare(QuestionsResult o1, QuestionsResult o2) {
+                return o1.getMin()- o1.getMin();
+            }
+        };
+        Collections.sort(list, compareByNamber);
+        return list;
+    }
+
+    private List<QuestionsResult> findQuestionResultByIdTest(Long idTest) {
+        List<QuestionsResult> newList = new ArrayList<>();
+        for (QuestionsResult result: questionsResultRepository.findAll()) {
+            if(result.getTest().getId().equals(idTest)){
+                newList.add(result);
+            }
+        }
+        return newList;
+    }
 }
+//    public void addTest(Test test){
+//        testRepository.save(test);
+//    }
+//    public void addQuestions(Test test, Question question){
+//        question.setTest(test);
+//        test.addQuestionToTest(question);
+//        testRepository.save(test);
+//        questionRepository.save(question);
+//    }
+//    public void addQuestionsAnswer(Question question, QuestionsAnswer questionsAnswer){
+//        questionsAnswer.setQuestion(question);
+//        question.addQuestionAnswer(questionsAnswer);
+//        questionRepository.save(question);
+//        questionsAnswerRepository.save(questionsAnswer);
+//    }
+//
+//    public void addResult(Test test, QuestionsResult result){
+//        result.setTest(test);
+//        test.addResultToTest(result);
+//        testRepository.save(test);
+//        questionsResultRepository.save(result);
+//    }

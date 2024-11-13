@@ -15,22 +15,23 @@
 
     <p style="text-align: center">${course.getDescription()}</p>
     <br>
-    <br>
-     <p style="text-align: center">Задания дня :</p>
-     <br>
+     <p style="text-align: center">Задания:</p>
      <br>
      <#list tasks as task>
          <div class="container">
-             <a class="a_style" href="/course/${course.getId()}/task/${task.getId()}">Задание дня № ${task.getNamber()}</a>
+             <a class="a_style" href="/course/${course.getId()}/task/${task.getId()}">Задание № ${task.getNamber()}</a>
          </div>
          <br>
      </#list>
     <br>
 
     <#if user.isAdmin()>
-        <a class="a_style" href="/test/add">
-            Добавить тест
-        </a><br>
+        <div class="container">
+            <a class="a_style" href="/add/task">
+                Добавить задание
+            </a>
+        </div>
+        <br>
     </#if>
 
 </@t.template>

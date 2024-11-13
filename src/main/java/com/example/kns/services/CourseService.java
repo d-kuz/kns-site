@@ -52,14 +52,6 @@ public class CourseService {
     }
 
     public boolean foundCourse(User user, Course course){
-//        Set<UserCourse> userCourses = user.getUserCourses();
-//        if (userCourses.size()>0){
-//            for (UserCourse c: userCourses) {
-//                if (c.getCourse().equals(course)){
-//                    return true;
-//                }
-//            }
-//        }
         for (UserCourse userCourse: userCourseRepository.findAll()) {
             if ((userCourse.getUser().equals(user)) & (userCourse.getCourse().equals(course))){
                 return true;
@@ -110,44 +102,44 @@ public class CourseService {
         return list;
     }
 
-    public boolean userAnswerPrew(User user, Task taskNext) {
-        Task task = foundPrewTask(taskNext);
-        if (task.equals(taskNext)){
-            return true;
-        }
-        for (Answer answer: task.getAnswers()){
-            if(answer.getUser().equals(user)){
-                return true;
-            }
-        }
-        return  false;
-    }
+//    public boolean userAnswerPrew(User user, Task taskNext) {
+//        Task task = foundPrewTask(taskNext);
+//        if (task.equals(taskNext)){
+//            return true;
+//        }
+//        for (Answer answer: task.getAnswers()){
+//            if(answer.getUser().equals(user)){
+//                return true;
+//            }
+//        }
+//        return  false;
+//    }
 
-    public boolean prewAnswerTime(User user, Task taskNext) {
-        Task task = foundPrewTask(taskNext);
-        if (task.equals(taskNext)){
-            return true;
-        }
-        for (Answer answer: task.getAnswers()){
-            if(answer.getUser().equals(user)){
-                if((answer.getDate().getDayOfYear() < LocalDateTime.now().getDayOfYear()) &
-                        (answer.getDate().getYear()<LocalDateTime.now().getYear())){
-                    return true;
-                }
-                return  false;
-            }
-        }
-        return false;
-    }
+//    public boolean prewAnswerTime(User user, Task taskNext) {
+//        Task task = foundPrewTask(taskNext);
+//        if (task.equals(taskNext)){
+//            return true;
+//        }
+//        for (Answer answer: task.getAnswers()){
+//            if(answer.getUser().equals(user)){
+//                if((answer.getDate().getDayOfYear() < LocalDateTime.now().getDayOfYear()) &
+//                        (answer.getDate().getYear()<LocalDateTime.now().getYear())){
+//                    return true;
+//                }
+//                return  false;
+//            }
+//        }
+//        return false;
+//    }
 
-    private Task foundPrewTask(Task taskNext) {
-        for (Task task: taskNext.getCourse().getTasks()){
-            if (task.getNamber()==task.getNamber()+1){
-                return task;
-            }
-        }
-        return taskNext;
-    }
+//    private Task foundPrewTask(Task taskNext) {
+//        for (Task task: taskNext.getCourse().getTasks()){
+//            if (task.getNamber()==task.getNamber()+1){
+//                return task;
+//            }
+//        }
+//        return taskNext;
+//    }
 
 
     public void addCourse(Course course) {

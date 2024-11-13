@@ -19,12 +19,14 @@ public class Question{
 
     @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     private Test test;
+
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
             mappedBy = "question")
     private List<QuestionsAnswer> questionsAnswers = new ArrayList<>();
 
-
-
+    public List<QuestionsAnswer> getQuestionsAnswers() {
+        return questionsAnswers;
+    }
 
     public void setId(Long id) {
         this.id = id;

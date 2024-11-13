@@ -1,19 +1,44 @@
 <#import "blocks/template.ftlh" as t>
 <@t.template user>
-    <form action="/test/${idTest}/questions">
+    <script>
+        var i = 0;
+        function buttonClick(n) {
+            i = i + n;
+            document.getElementById('inc').value = i;
+        }
+    </script>
+    <div class="container">
+    <p>Посчитайте сумму:</p>
+    </div>
+    <#list q as question>
         <div class="container">
-        <#list test.getQuestions() as questions>
+            <p>${question.getText()}
+        </div>
         <div class="container">
-            ${question.getText()}
-            <#list questions.getQuestionsAnswer() as answer>
-                <input type="radio" value="${answer.getPoint()}"> ${answer.getText()}
-            </#list>
+                <button onclick="buttonClick(1);">+1</button>
+                <button onclick="buttonClick(2);">+2</button>
+                <button onclick="buttonClick(3);">+3</button>
+                <button onclick="buttonClick(4);">+4</button>
+            </p>
         </div>
         <br>
-        </#list>
+    </#list>
+        <br>
+    <p>
+    <div class="container">
+    Ваш результат:
+    <input type="text" id="inc" value="0"></input>
+    </div>
+    </p>
+    <br>
+    <br>
+    <#list r as result>
+        <div class="container">
+            Диапазон: ${result.getMin()} - ${result.getMax()}
+        </div>
+        <div class="container">
+            ${result.getText()}
         </div>
         <br>
-        <input type="submit">
-    </a>
-    </form>
+    </#list>
 </@t.template>

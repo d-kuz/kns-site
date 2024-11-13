@@ -19,23 +19,18 @@ public class QuestionsAnswer {
     public String getText() {
         return text;
     }
-
     public void setText(String text) {
         this.text = text;
     }
-
     public Long getPoint() {
         return point;
     }
-
     public void setPoint(Long point) {
         this.point = point;
     }
-
     public Question getQuestion() {
         return question;
     }
-
     public void setQuestion(Question question) {
         this.question = question;
     }
